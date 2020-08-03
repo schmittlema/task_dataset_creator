@@ -1,0 +1,4 @@
+dataset_size: 1000
+img_length: 500
+img_width: 300
+random_probability: 0.15 # probability of considering a successor not heading to the goal when making the line. This allows for lines not always going towards goal
