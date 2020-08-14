@@ -81,17 +81,7 @@ def draw_line(img, params):
         line.append(successor)
         curr_head = successor
 
-        for idx in range(0,len(line)):
-            if idx != 0:
-                prev_point = line[idx-1]
-                point = line[idx]
-                if prev_point[0] == point[0]:
-                    #img[point[0], min(prev_point[1],point[1]):max(prev_point[1],point[1])] = 1
-                    cv2.line(img, (point[0], min(prev_point[1], point[1])), (point[0], max(prev_point[1],point[1])), [1], params['thickness'])
-                else:
-                    cv2.line(img, (min(prev_point[0], point[0]), point[1]), (max(prev_point[0],point[0]), point[1]), [1], params['thickness'])
-                    #img[min(prev_point[0],point[0]):max(prev_point[0],point[0]), point[1]] = 1
-    return img
+    return line 
 
 def make_images(params):
     '''
@@ -100,11 +90,9 @@ def make_images(params):
     dataset = []
     for i in range(0, params['dataset_size']):
         img = np.zeros((params['img_length'], params['img_width']))
-        img = draw_line(img, params)
-        dataset.append(img)
+        line = draw_line(img, params)
+        dataset.append(line)
 
-    cv2.imshow('img', dataset[0])
-    cv2.waitKey()
     dataset = np.array(dataset)
     return dataset
 
